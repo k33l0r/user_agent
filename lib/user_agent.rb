@@ -1,12 +1,12 @@
 class UserAgent
-  def self.engine_version_for_user_agent(string)
-    if string =~ /#{engine_for_user_agent(string)}[\/ ]([\d\w\.\-]+)/i
+  def self.engine_version(string)
+    if string =~ /#{engine(string)}[\/ ]([\d\w\.\-]+)/i
       $1
     end
   end
 
-  def self.version_for_user_agent(string)
-    case name = name_for_user_agent(string)
+  def self.version(string)
+    case name = browser_name(string)
       when :chrome ; $1 if string =~ /chrome\/([\d\w\.\-]+)/i
       when :safari ; $1 if string =~ /version\/([\d\w\.\-]+)/i
       when :ps3    ; $1 if string =~ /([\d\w\.\-]+)\)\s*$/i
@@ -15,7 +15,7 @@ class UserAgent
     end
   end
 
-  def self.engine_for_user_agent(string)
+  def self.engine(string)
     case string
       when /webkit/i    ; :webkit
       when /khtml/i     ; :khtml
@@ -28,7 +28,7 @@ class UserAgent
     end
   end
 
-  def self.os_for_user_agent(string)
+  def self.os(string)
     case string
       when /windows nt 6\.0/i             ; 'Windows Vista'
       when /windows nt 6\.\d+/i           ; 'Windows 7'
@@ -46,7 +46,7 @@ class UserAgent
     end
   end
 
-  def self.name_for_user_agent(string)
+  def self.browser_name(string)
     case string
       when /konqueror/i            ; :konqueror
       when /chrome/i               ; :chrome
@@ -60,7 +60,7 @@ class UserAgent
     end
   end
 
-  def self.platform_for_user_agent(string)
+  def self.platform(string)
     case string
       when /windows/i     ; :windows
       when /macintosh/i   ; :macintosh
@@ -80,27 +80,27 @@ class UserAgent
   end
 
   def name
-    self.class.name_for_user_agent(source)
+    self.class.browser_name(source)
   end
 
   def version
-    self.class.version_for_user_agent(source)
+    self.class.version(source)
   end
 
   def engine
-    self.class.engine_for_user_agent(source)
+    self.class.engine(source)
   end
 
   def engine_version
-    self.class.engine_version_for_user_agent(source)
+    self.class.engine_version(source)
   end
 
   def os
-    self.class.os_for_user_agent(source)
+    self.class.os(source)
   end
 
   def platform
-    self.class.platform_for_user_agent(source)
+    self.class.platform(source)
   end
 
   def to_s
