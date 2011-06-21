@@ -49,10 +49,10 @@ class UserAgent
 
   def self.version_for_user_agent(string)
     case name = name_for_user_agent(string)
-      when :Chrome ; $1 if string =~ /chrome\/([\d\w\.\-]+)/i
-      when :Safari ; $1 if string =~ /version\/([\d\w\.\-]+)/i
-      when :PS3    ; $1 if string =~ /([\d\w\.\-]+)\)\s*$/i
-      when :PSP    ; $1 if string =~ /([\d\w\.\-]+)\)?\s*$/i
+      when :chrome ; $1 if string =~ /chrome\/([\d\w\.\-]+)/i
+      when :safari ; $1 if string =~ /version\/([\d\w\.\-]+)/i
+      when :ps3    ; $1 if string =~ /([\d\w\.\-]+)\)\s*$/i
+      when :psp    ; $1 if string =~ /([\d\w\.\-]+)\)?\s*$/i
       else           $1 if string =~ /#{name}[\/ ]([\d\w\.\-]+)/i
     end
   end
@@ -72,46 +72,46 @@ class UserAgent
 
   def self.os_for_user_agent(string)
     case string
-      when /windows nt 6\.0/i             ; :'Windows Vista'
-      when /windows nt 6\.\d+/i           ; :'Windows 7'
-      when /windows nt 5\.2/i             ; :'Windows 2003'
-      when /windows nt 5\.1/i             ; :'Windows XP'
-      when /windows nt 5\.0/i             ; :'Windows 2000'
-      when /os x (\d+)[._](\d+)/i         ; :"OS X #{$1}.#{$2}"
-      when /linux/i                       ; :Linux
-      when /wii/i                         ; :Wii
-      when /playstation 3/i               ; :Playstation
-      when /playstation portable/i        ; :Playstation
-      when /\(iPad.*os (\d+)[._](\d+)/i   ; :"iPad OS #{$1}.#{$2}"
-      when /\(iPhone.*os (\d+)[._](\d+)/i ; :"iPhone OS #{$1}.#{$2}"
-      else                                ; :Unknown
+      when /windows nt 6\.0/i             ; 'Windows Vista'
+      when /windows nt 6\.\d+/i           ; 'Windows 7'
+      when /windows nt 5\.2/i             ; 'Windows 2003'
+      when /windows nt 5\.1/i             ; 'Windows XP'
+      when /windows nt 5\.0/i             ; 'Windows 2000'
+      when /os x (\d+)[._](\d+)/i         ; "OS X #{$1}.#{$2}"
+      when /linux/i                       ; 'Linux'
+      when /wii/i                         ; 'Wii'
+      when /playstation 3/i               ; 'Playstation'
+      when /playstation portable/i        ; 'Playstation'
+      when /\(iPad.*os (\d+)[._](\d+)/i   ; "iPad OS #{$1}.#{$2}"
+      when /\(iPhone.*os (\d+)[._](\d+)/i ; "iPhone OS #{$1}.#{$2}"
+      else                                ; 'Unknown'
     end
   end
 
   def self.name_for_user_agent(string)
     case string
-      when /konqueror/i            ; :Konqueror
-      when /chrome/i               ; :Chrome
-      when /safari/i               ; :Safari
-      when /msie/i                 ; :IE
-      when /opera/i                ; :Opera
-      when /playstation 3/i        ; :PS3
-      when /playstation portable/i ; :PSP
-      when /firefox/i              ; :Firefox
-      else                         ; :Unknown
+      when /konqueror/i            ; :konqueror
+      when /chrome/i               ; :chrome
+      when /safari/i               ; :safari
+      when /msie/i                 ; :ie
+      when /opera/i                ; :opera
+      when /playstation 3/i        ; :ps3
+      when /playstation portable/i ; :psp
+      when /firefox/i              ; :firefox
+      else                         ; :unknown
     end
   end
 
   def self.platform_for_user_agent(string)
     case string
-      when /windows/i     ; :Windows
-      when /macintosh/i   ; :Macintosh
-      when /linux/i       ; :Linux
-      when /wii/i         ; :Wii
-      when /playstation/i ; :Playstation
-      when /ipad/i        ; :iPad
-      when /iphone/i      ; :iPhone
-      else                  :Unknown
+      when /windows/i     ; :windows
+      when /macintosh/i   ; :macintosh
+      when /linux/i       ; :linux
+      when /wii/i         ; :wii
+      when /playstation/i ; :playstation
+      when /ipad/i        ; :ipad
+      when /iphone/i      ; :iphone
+      else                  :unknown
     end
   end
 end

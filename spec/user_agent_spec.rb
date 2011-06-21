@@ -13,7 +13,7 @@ describe UserAgent do
 
   describe "#os" do
     it "should return operating system symbol" do
-      @agent.os.should == :'OS X 10.5'
+      @agent.os.should == 'OS X 10.5'
     end
   end
 
@@ -37,13 +37,13 @@ describe UserAgent do
 
   describe "#inspect" do
     it "should return string presenting the engine, os, version, etc" do
-      @agent.inspect.should == '#<UserAgent:Safari version:"4.0dp1" engine:"webkit:528.4" os:"OS X 10.5">'
+      @agent.inspect.should == '#<UserAgent:safari version:"4.0dp1" engine:"webkit:528.4" os:"OS X 10.5">'
     end
   end
 
   describe "#name" do
     it "should return the agent name symbol" do
-      @agent.name.should == :'Safari'
+      @agent.name.should == :safari
     end
   end
 
