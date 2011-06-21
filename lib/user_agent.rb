@@ -1,46 +1,4 @@
 class UserAgent
-  attr_reader :string
-
-  def initialize(string)
-    @string = string.strip
-  end
-
-  def name
-    self.class.name_for_user_agent(string)
-  end
-
-  def version
-    self.class.version_for_user_agent(string)
-  end
-
-  def engine
-    self.class.engine_for_user_agent(string)
-  end
-
-  def engine_version
-    self.class.engine_version_for_user_agent(string)
-  end
-
-  def os
-    self.class.os_for_user_agent(string)
-  end
-
-  def platform
-    self.class.platform_for_user_agent(string)
-  end
-
-  def to_s
-    string
-  end
-
-  def inspect
-    "#<UserAgent:#{name} version:#{version.inspect} engine:\"#{engine.to_s}:#{engine_version}\" os:#{os.to_s.inspect}>"
-  end
-
-  def ==(other)
-    string == other.string
-  end
-
   def self.engine_version_for_user_agent(string)
     if string =~ /#{engine_for_user_agent(string)}[\/ ]([\d\w\.\-]+)/i
       $1
@@ -113,5 +71,47 @@ class UserAgent
       when /iphone/i      ; :iphone
       else                  :unknown
     end
+  end
+
+  attr_reader :string
+
+  def initialize(string)
+    @string = string.strip
+  end
+
+  def name
+    self.class.name_for_user_agent(string)
+  end
+
+  def version
+    self.class.version_for_user_agent(string)
+  end
+
+  def engine
+    self.class.engine_for_user_agent(string)
+  end
+
+  def engine_version
+    self.class.engine_version_for_user_agent(string)
+  end
+
+  def os
+    self.class.os_for_user_agent(string)
+  end
+
+  def platform
+    self.class.platform_for_user_agent(string)
+  end
+
+  def to_s
+    string
+  end
+
+  def inspect
+    "#<UserAgent:#{name} version:#{version.inspect} engine:\"#{engine.to_s}:#{engine_version}\" os:#{os.to_s.inspect}>"
+  end
+
+  def ==(other)
+    string == other.string
   end
 end
