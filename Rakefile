@@ -1,15 +1,7 @@
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
-$:.unshift 'lib'
-require 'user-agent'
-require 'rubygems'
-require 'rake'
-require 'echoe'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new
 
-Echoe.new "user-agent", Agent::VERSION do |p|
-  p.author = "TJ Holowaychuk"
-  p.email = "tj@vision-media.ca"
-  p.summary = "User agent parser"
-  p.runtime_dependencies = []
-end
-
-Dir['tasks/**/*.rake'].sort.each { |f| load f }
+task :default => :spec
