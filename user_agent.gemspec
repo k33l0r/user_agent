@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "user-agent/version"
+require "user_agent/version"
 
 Gem::Specification.new do |s|
-  s.name        = "user-agent"
-  s.version     = Agent::VERSION
+  s.name        = "user_agent"
+  s.version     = UserAgent::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TJ Holowaychuk"]
-  s.email       = ['tj@vision-media.ca']
+  s.authors     = ['TJ Holowaychuk', 'John Nunemaker']
+  s.email       = ['tj@vision-media.ca', 'nunemaker@gmail.com']
   s.homepage    = ''
   s.summary     = %q{User agent parser}
   s.description = %q{User agent parser}

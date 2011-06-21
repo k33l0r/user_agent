@@ -1,9 +1,8 @@
+require File.expand_path('../spec_helper', __FILE__)
 
-require File.dirname(__FILE__) + '/spec_helper'
-
-def test name, version, os, engine, engine_version, string
+def test(name, version, os, engine, engine_version, string)
   it "should parse #{name} #{version} on #{os} with engine #{engine} #{engine_version}" do
-    agent = Agent.new string
+    agent = UserAgent.new string
     agent.name.should == name
     agent.os.should == os
     agent.engine.should == engine
@@ -12,7 +11,7 @@ def test name, version, os, engine, engine_version, string
   end
 end
 
-describe Agent do
+describe UserAgent do
 
   test :Safari, '4.0dp1', :'Windows XP',    :webkit, '526.9',    'Mozilla/5.0 (Windows; U; Windows NT 5.1; en) AppleWebKit/526.9 (KHTML, like Gecko) Version/4.0dp1 Safari/526.8'
   test :Safari, '4.0.3',  :'Windows Vista', :webkit, '531.9',    'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-us) AppleWebKit/531.9 (KHTML, like Gecko) Version/4.0.3 Safari/531.9'

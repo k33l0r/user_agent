@@ -1,6 +1,6 @@
 $:.unshift(File.expand_path('../../lib', __FILE__))
 
-require 'user-agent'
+require 'user_agent'
 require 'pathname'
 require 'logger'
 
