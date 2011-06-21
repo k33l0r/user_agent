@@ -25,6 +25,10 @@ class UserAgent
     self.class.os_for_user_agent(string)
   end
 
+  def platform
+    self.class.platform_for_user_agent(string)
+  end
+
   def to_s
     string
   end
@@ -68,17 +72,19 @@ class UserAgent
 
   def self.os_for_user_agent(string)
     case string
-      when /windows nt 6\.0/i      ; :'Windows Vista'
-      when /windows nt 6\.\d+/i    ; :'Windows 7'
-      when /windows nt 5\.2/i      ; :'Windows 2003'
-      when /windows nt 5\.1/i      ; :'Windows XP'
-      when /windows nt 5\.0/i      ; :'Windows 2000'
-      when /os x (\d+)[._](\d+)/i  ; :"OS X #{$1}.#{$2}"
-      when /linux/i                ; :Linux
-      when /wii/i                  ; :Wii
-      when /playstation 3/i        ; :Playstation
-      when /playstation portable/i ; :Playstation
-      else                         ; :Unknown
+      when /windows nt 6\.0/i             ; :'Windows Vista'
+      when /windows nt 6\.\d+/i           ; :'Windows 7'
+      when /windows nt 5\.2/i             ; :'Windows 2003'
+      when /windows nt 5\.1/i             ; :'Windows XP'
+      when /windows nt 5\.0/i             ; :'Windows 2000'
+      when /os x (\d+)[._](\d+)/i         ; :"OS X #{$1}.#{$2}"
+      when /linux/i                       ; :Linux
+      when /wii/i                         ; :Wii
+      when /playstation 3/i               ; :Playstation
+      when /playstation portable/i        ; :Playstation
+      when /\(iPad.*os (\d+)[._](\d+)/i   ; :"iPad OS #{$1}.#{$2}"
+      when /\(iPhone.*os (\d+)[._](\d+)/i ; :"iPhone OS #{$1}.#{$2}"
+      else                                ; :Unknown
     end
   end
 
@@ -93,6 +99,19 @@ class UserAgent
       when /playstation portable/i ; :PSP
       when /firefox/i              ; :Firefox
       else                         ; :Unknown
+    end
+  end
+
+  def self.platform_for_user_agent(string)
+    case string
+      when /windows/i     ; :Windows
+      when /macintosh/i   ; :Macintosh
+      when /linux/i       ; :Linux
+      when /wii/i         ; :Wii
+      when /playstation/i ; :Playstation
+      when /ipad/i        ; :iPad
+      when /iphone/i      ; :iPhone
+      else                  :Unknown
     end
   end
 end
