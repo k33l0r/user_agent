@@ -7,7 +7,7 @@ describe UserAgent do
 
   describe "#initialize" do
     it "should allow a user agent string to be passed" do
-      UserAgent.new('foo').string.should == 'foo'
+      UserAgent.new('foo').source.should == 'foo'
     end
   end
 
@@ -31,7 +31,7 @@ describe UserAgent do
 
   describe "#to_s" do
     it "should return the user agent string" do
-      @agent.to_s.should == @agent.string
+      @agent.to_s.should == @agent.source
     end
   end
 

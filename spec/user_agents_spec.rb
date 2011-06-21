@@ -1,8 +1,8 @@
 require File.expand_path('../spec_helper', __FILE__)
 
-def test(name, version, platform, os, engine, engine_version, string)
+def test(name, version, platform, os, engine, engine_version, source)
   it "should parse #{name} #{version} on #{os} with engine #{engine} #{engine_version}" do
-    agent = UserAgent.new string
+    agent = UserAgent.new(source)
     agent.name.should == name
     agent.platform.should == platform
     agent.os.should == os

@@ -73,38 +73,38 @@ class UserAgent
     end
   end
 
-  attr_reader :string
+  attr_reader :source
 
-  def initialize(string)
-    @string = string.strip
+  def initialize(source)
+    @source = source.strip
   end
 
   def name
-    self.class.name_for_user_agent(string)
+    self.class.name_for_user_agent(source)
   end
 
   def version
-    self.class.version_for_user_agent(string)
+    self.class.version_for_user_agent(source)
   end
 
   def engine
-    self.class.engine_for_user_agent(string)
+    self.class.engine_for_user_agent(source)
   end
 
   def engine_version
-    self.class.engine_version_for_user_agent(string)
+    self.class.engine_version_for_user_agent(source)
   end
 
   def os
-    self.class.os_for_user_agent(string)
+    self.class.os_for_user_agent(source)
   end
 
   def platform
-    self.class.platform_for_user_agent(string)
+    self.class.platform_for_user_agent(source)
   end
 
   def to_s
-    string
+    @source
   end
 
   def inspect
@@ -112,6 +112,6 @@ class UserAgent
   end
 
   def ==(other)
-    string == other.string
+    source == other.source
   end
 end
