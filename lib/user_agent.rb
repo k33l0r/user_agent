@@ -145,27 +145,27 @@ class UserAgent
   end
 
   def name
-    self.class.browser_name(source)
+    @name ||= self.class.browser_name(source)
   end
 
   def version
-    self.class.version(source)
+    @version ||= self.class.browser_version(source)
   end
 
   def engine
-    self.class.engine(source)
+    @engine ||= self.class.engine(source)
   end
 
   def engine_version
-    self.class.engine_version(source)
+    @engine_version ||= self.class.engine_version(source)
   end
 
   def os
-    self.class.os(source)
+    @os ||= self.class.os(source)
   end
 
   def platform
-    self.class.platform(source)
+    @platform ||= self.class.platform(source)
   end
 
   def to_s
