@@ -15,6 +15,7 @@ User agent parser.
 
 * Safari
 * Chrome
+* Firefox
 * Opera
 * IE
 * Konqueror
