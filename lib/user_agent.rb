@@ -176,7 +176,8 @@ class UserAgent
     "#<UserAgent:#{name} version:#{version.inspect} engine:\"#{engine.to_s}:#{engine_version}\" os:#{os.to_s.inspect}>"
   end
 
-  def ==(other)
-    source == other.source
+  def eql?(other)
+    self.class.eql?(other.class) && source == other.source
   end
+  alias :== :eql?
 end
