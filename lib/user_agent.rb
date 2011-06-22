@@ -1,75 +1,140 @@
 class UserAgent
+
+  AttributesForInspect = [:name, :version, :os, :platform, :engine, :engine_version]
+
+  module Engines
+    Webkit    = /webkit/i
+    Khtml     = /khtml/i
+    Konqueror = /konqueror/i
+    Chrome    = /chrome/i
+    Presto    = /presto/i
+    Gecko     = /gecko/i
+    Msie      = /msie/i
+  end
+
+  module Versions
+    Chrome  = /chrome\/([\d\w\.\-]+)/i
+    Safari  = /version\/([\d\w\.\-]+)/i
+    Ps3     = /([\d\w\.\-]+)\)\s*$/i
+    Psp     = /([\d\w\.\-]+)\)?\s*$/i
+  end
+
+  module Browsers
+    Konqueror           = /konqueror/i
+    Chrome              = /chrome/i
+    Safari              = /safari/i
+    IE                  = /msie/i
+    Opera               = /opera/i
+    PS3                 = /playstation 3/i
+    PSP                 = /playstation portable/i
+    Firefox             = /firefox/i
+  end
+
+  module OS
+    WindowsVista  = /windows nt 6\.0/i
+    Windows7      = /windows nt 6\.\d+/i
+    Windows2003   = /windows nt 5\.2/i
+    WindowsXP     = /windows nt 5\.1/i
+    Windows2000   = /windows nt 5\.0/i
+    OSX           = /os x (\d+)[._](\d+)/i
+    Linux         = /linux/i
+    Wii           = /wii/i
+    PS3           = /playstation 3/i
+    PSP           = /playstation portable/i
+    Ipad          = /\(iPad.*os (\d+)[._](\d+)/i
+    Iphone        = /\(iPhone.*os (\d+)[._](\d+)/i
+  end
+
+  module Platform
+    Windows     = /windows/i
+    Mac         = /macintosh/i
+    Linux       = /linux/i
+    Wii         = /wii/i
+    Playstation = /playstation/i
+    Ipad        = /ipad/i
+    Iphone      = /iphone/i
+  end
+
+  def self.engine(string)
+    case string
+      when Engines::Webkit    then :webkit
+      when Engines::Khtml     then :khtml
+      when Engines::Konqueror then :konqueror
+      when Engines::Chrome    then :chrome
+      when Engines::Presto    then :presto
+      when Engines::Gecko     then :gecko
+      when Engines::Msie      then :msie
+      else
+        :unknown
+    end
+  end
+
   def self.engine_version(string)
     if string =~ /#{engine(string)}[\/ ]([\d\w\.\-]+)/i
       $1
     end
   end
 
-  def self.version(string)
-    case name = browser_name(string)
-      when :chrome ; $1 if string =~ /chrome\/([\d\w\.\-]+)/i
-      when :safari ; $1 if string =~ /version\/([\d\w\.\-]+)/i
-      when :ps3    ; $1 if string =~ /([\d\w\.\-]+)\)\s*$/i
-      when :psp    ; $1 if string =~ /([\d\w\.\-]+)\)?\s*$/i
-      else           $1 if string =~ /#{name}[\/ ]([\d\w\.\-]+)/i
+  def self.browser_name(string)
+    case string
+      when Browsers::Konqueror  then :konqueror
+      when Browsers::Chrome     then :chrome
+      when Browsers::Safari     then :safari
+      when Browsers::IE         then :ie
+      when Browsers::Opera      then :opera
+      when Browsers::PS3        then :ps3
+      when Browsers::PSP        then :psp
+      when Browsers::Firefox    then :firefox
+      else
+        :unknown
     end
   end
 
-  def self.engine(string)
-    case string
-      when /webkit/i    ; :webkit
-      when /khtml/i     ; :khtml
-      when /konqueror/i ; :konqueror
-      when /chrome/i    ; :chrome
-      when /presto/i    ; :presto
-      when /gecko/i     ; :gecko
-      when /msie/i      ; :msie
-      else                :unknown
+  def self.browser_version(string)
+    case name = browser_name(string)
+      when :chrome
+        $1 if string =~ Versions::Chrome
+      when :safari
+        $1 if string =~ Versions::Safari
+      when :ps3
+        $1 if string =~ Versions::Ps3
+      when :psp
+        $1 if string =~ Versions::Psp
+      else
+        $1 if string =~ /#{name}[\/ ]([\d\w\.\-]+)/i
     end
   end
 
   def self.os(string)
     case string
-      when /windows nt 6\.0/i             ; 'Windows Vista'
-      when /windows nt 6\.\d+/i           ; 'Windows 7'
-      when /windows nt 5\.2/i             ; 'Windows 2003'
-      when /windows nt 5\.1/i             ; 'Windows XP'
-      when /windows nt 5\.0/i             ; 'Windows 2000'
-      when /os x (\d+)[._](\d+)/i         ; "OS X #{$1}.#{$2}"
-      when /linux/i                       ; 'Linux'
-      when /wii/i                         ; 'Wii'
-      when /playstation 3/i               ; 'Playstation'
-      when /playstation portable/i        ; 'Playstation'
-      when /\(iPad.*os (\d+)[._](\d+)/i   ; "iPad OS #{$1}.#{$2}"
-      when /\(iPhone.*os (\d+)[._](\d+)/i ; "iPhone OS #{$1}.#{$2}"
-      else                                ; 'Unknown'
-    end
-  end
-
-  def self.browser_name(string)
-    case string
-      when /konqueror/i            ; :konqueror
-      when /chrome/i               ; :chrome
-      when /safari/i               ; :safari
-      when /msie/i                 ; :ie
-      when /opera/i                ; :opera
-      when /playstation 3/i        ; :ps3
-      when /playstation portable/i ; :psp
-      when /firefox/i              ; :firefox
-      else                         ; :unknown
+      when OS::WindowsVista then 'Windows Vista'
+      when OS::Windows7     then 'Windows 7'
+      when OS::Windows2003  then 'Windows 2003'
+      when OS::WindowsXP    then 'Windows XP'
+      when OS::Windows2000  then 'Windows 2000'
+      when OS::OSX          then "OS X #{$1}.#{$2}"
+      when OS::Linux        then 'Linux'
+      when OS::Wii          then 'Wii'
+      when OS::PS3          then 'Playstation'
+      when OS::PSP          then 'Playstation'
+      when OS::Ipad         then "iPad OS #{$1}.#{$2}"
+      when OS::Iphone       then "iPhone OS #{$1}.#{$2}"
+      else
+        'Unknown'
     end
   end
 
   def self.platform(string)
     case string
-      when /windows/i     ; :windows
-      when /macintosh/i   ; :macintosh
-      when /linux/i       ; :linux
-      when /wii/i         ; :wii
-      when /playstation/i ; :playstation
-      when /ipad/i        ; :ipad
-      when /iphone/i      ; :iphone
-      else                  :unknown
+      when Platform::Windows     then :windows
+      when Platform::Mac         then :macintosh
+      when Platform::Linux       then :linux
+      when Platform::Wii         then :wii
+      when Platform::Playstation then :playstation
+      when Platform::Ipad        then :ipad
+      when Platform::Iphone      then :iphone
+      else
+        :unknown
     end
   end
 

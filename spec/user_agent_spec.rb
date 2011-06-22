@@ -5,6 +5,12 @@ describe UserAgent do
     @agent = UserAgent.new 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/528.4+ (KHTML, like Gecko) Version/4.0dp1 Safari/526.11.2'
   end
 
+  describe ".engine_version" do
+    it "can detect webkit" do
+
+    end
+  end
+
   describe "#initialize" do
     it "should allow a user agent string to be passed" do
       UserAgent.new('foo').source.should == 'foo'
@@ -37,7 +43,7 @@ describe UserAgent do
 
   describe "#inspect" do
     it "should return string presenting the engine, os, version, etc" do
-      @agent.inspect.should == '#<UserAgent:safari version:"4.0dp1" engine:"webkit:528.4" os:"OS X 10.5">'
+      @agent.inspect.should == '#<UserAgent: name: :safari, version: "4.0dp1", os: "OS X 10.5", platform: :macintosh, engine: :webkit, engine_version: "528.4">'
     end
   end
 
@@ -47,16 +53,42 @@ describe UserAgent do
     end
   end
 
+  describe "#eql?" do
+    it "returns true for same source" do
+      a = UserAgent.new('foo')
+      b = UserAgent.new('foo')
+      a.should eql(b)
+    end
+
+    it "returns false for different source" do
+      a = UserAgent.new('foo')
+      b = UserAgent.new('bar')
+      a.should_not eql(b)
+    end
+
+    it "returns false for different classes" do
+      a = UserAgent.new('foo')
+      b = Class.new.new
+      a.should_not eql(b)
+    end
+  end
+
   describe "#==" do
-    it "should be equal when the user agent strings are the same" do
-      a = UserAgent.new 'foo'
-      b = UserAgent.new 'foo'
+    it "returns true for same source" do
+      a = UserAgent.new('foo')
+      b = UserAgent.new('foo')
       a.should == b
     end
 
-    it "should not be equal when user agent strings are different" do
-      a = UserAgent.new 'foo'
-      b = UserAgent.new 'bar'
+    it "returns false for different source" do
+      a = UserAgent.new('foo')
+      b = UserAgent.new('bar')
+      a.should_not == b
+    end
+
+    it "returns false for different classes" do
+      a = UserAgent.new('foo')
+      b = Class.new.new
       a.should_not == b
     end
   end
