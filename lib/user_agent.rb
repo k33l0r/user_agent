@@ -3,31 +3,31 @@ class UserAgent
   AttributesForInspect = [:name, :version, :os, :platform, :engine, :engine_version]
 
   module Engines
-    Webkit    = /webkit/i
-    Khtml     = /khtml/i
-    Konqueror = /konqueror/i
-    Chrome    = /chrome/i
-    Presto    = /presto/i
-    Gecko     = /gecko/i
-    Msie      = /msie/i
+    Webkit        = /webkit/i
+    Khtml         = /khtml/i
+    Konqueror     = /konqueror/i
+    Chrome        = /chrome/i
+    Presto        = /presto/i
+    Gecko         = /gecko/i
+    Msie          = /msie/i
   end
 
   module Versions
-    Chrome  = /chrome\/([\d\w\.\-]+)/i
-    Safari  = /version\/([\d\w\.\-]+)/i
-    Ps3     = /([\d\w\.\-]+)\)\s*$/i
-    Psp     = /([\d\w\.\-]+)\)?\s*$/i
+    Chrome        = /chrome\/([\d\w\.\-]+)/i
+    Safari        = /version\/([\d\w\.\-]+)/i
+    Ps3           = /([\d\w\.\-]+)\)\s*$/i
+    Psp           = /([\d\w\.\-]+)\)?\s*$/i
   end
 
   module Browsers
-    Konqueror           = /konqueror/i
-    Chrome              = /chrome/i
-    Safari              = /safari/i
-    IE                  = /msie/i
-    Opera               = /opera/i
-    PS3                 = /playstation 3/i
-    PSP                 = /playstation portable/i
-    Firefox             = /firefox/i
+    Konqueror     = /konqueror/i
+    Chrome        = /chrome/i
+    Safari        = /safari/i
+    IE            = /msie/i
+    Opera         = /opera/i
+    PS3           = /playstation 3/i
+    PSP           = /playstation portable/i
+    Firefox       = /firefox/i
   end
 
   module OS
@@ -46,13 +46,13 @@ class UserAgent
   end
 
   module Platform
-    Windows     = /windows/i
-    Mac         = /macintosh/i
-    Linux       = /linux/i
-    Wii         = /wii/i
-    Playstation = /playstation/i
-    Ipad        = /ipad/i
-    Iphone      = /iphone/i
+    Windows       = /windows/i
+    Mac           = /macintosh/i
+    Linux         = /linux/i
+    Wii           = /wii/i
+    Playstation   = /playstation/i
+    Ipad          = /ipad/i
+    Iphone        = /iphone/i
   end
 
   def self.engine(string)
