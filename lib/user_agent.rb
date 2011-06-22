@@ -53,6 +53,7 @@ class UserAgent
     Playstation   = /playstation/i
     Ipad          = /ipad/i
     Iphone        = /iphone/i
+    Android       = /android/i
   end
 
   def self.engine(string)
@@ -128,6 +129,7 @@ class UserAgent
     case string
       when Platform::Windows     then :windows
       when Platform::Mac         then :macintosh
+      when Platform::Android     then :android
       when Platform::Linux       then :linux
       when Platform::Wii         then :wii
       when Platform::Playstation then :playstation
