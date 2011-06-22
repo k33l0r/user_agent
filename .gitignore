@@ -2,4 +2,4 @@ log
 Gemfile.lock
 .bundle
 specs.watchr
-
+pkg
