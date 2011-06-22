@@ -4,12 +4,13 @@ User agent parser.
 
 == Example
 
-  agent = UserAgent.new 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-us) AppleWebKit/531.9 (KHTML, like Gecko) Version/4.0.3 Safari/531.9'
-  agent.name    # => :Safari
-  agent.version # => '4.0.3'
-  agent.engine  # => :webkit
-  agent.os      # => :'Windows Vista'
+  agent = UserAgent.new('Mozilla/5.0 (Windows; U; Windows NT 6.0; en-us) AppleWebKit/531.9 (KHTML, like Gecko) Version/4.0.3 Safari/531.9')
+  agent.name            # => :safari
+  agent.version         # => '4.0.3'
+  agent.engine          # => :webkit
   agent.engine_version  # => '531.9'
+  agent.platform        # => :windows
+  agent.os              # => 'Windows Vista'
 
 == Supported Agents
 
