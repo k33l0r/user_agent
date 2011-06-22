@@ -173,7 +173,11 @@ class UserAgent
   end
 
   def inspect
-    "#<UserAgent:#{name} version:#{version.inspect} engine:\"#{engine.to_s}:#{engine_version}\" os:#{os.to_s.inspect}>"
+    attributes_as_nice_string = AttributesForInspect.map do |name|
+      "#{name}: #{send(name).inspect}"
+    end.join(', ')
+
+    "#<#{self.class}: #{attributes_as_nice_string}>"
   end
 
   def eql?(other)
