@@ -52,8 +52,10 @@ class UserAgent
     Wii           = /wii/i
     Playstation   = /playstation/i
     Ipad          = /ipad/i
+    Ipod          = /ipod/i
     Iphone        = /iphone/i
     Android       = /android/i
+    Blackberry    = /blackberry/i
   end
 
   def self.engine(string)
@@ -130,10 +132,12 @@ class UserAgent
       when Platform::Windows     then :windows
       when Platform::Mac         then :macintosh
       when Platform::Android     then :android
+      when Platform::Blackberry  then :blackberry
       when Platform::Linux       then :linux
       when Platform::Wii         then :wii
       when Platform::Playstation then :playstation
       when Platform::Ipad        then :ipad
+      when Platform::Ipod        then :ipod
       when Platform::Iphone      then :iphone
       else
         :unknown

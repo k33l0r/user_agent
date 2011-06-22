@@ -5,9 +5,15 @@ describe UserAgent do
     @agent = UserAgent.new 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; en-us) AppleWebKit/528.4+ (KHTML, like Gecko) Version/4.0dp1 Safari/526.11.2'
   end
 
-  describe ".engine_version" do
-    it "can detect webkit" do
+  describe ".platform" do
+    it "can detect blackberry" do
+      agent = 'Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en-US) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.246 Mobile Safari/534.1+'
+      UserAgent.platform(agent).should == :blackberry
+    end
 
+    it "can detect ipod" do
+      agent = 'Mozilla/5.0 (iPod; U; CPU iPhone OS 2_0 like Mac OS X; de-de) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5A347 Safari/525.20'
+      UserAgent.platform(agent).should == :ipod
     end
   end
 
