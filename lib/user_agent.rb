@@ -129,16 +129,16 @@ class UserAgent
 
   def self.platform(string)
     case string
-      when Platform::Windows     then :windows
-      when Platform::Mac         then :macintosh
-      when Platform::Android     then :android
-      when Platform::Blackberry  then :blackberry
-      when Platform::Linux       then :linux
-      when Platform::Wii         then :wii
-      when Platform::Playstation then :playstation
-      when Platform::Ipad        then :ipad
-      when Platform::Ipod        then :ipod
-      when Platform::Iphone      then :iphone
+      when Platform::Windows       then :windows
+      when Platform::Mac           then :macintosh
+      when Platform::Android       then :android
+      when Platform::Blackberry    then :blackberry
+      when Platform::Linux         then :linux
+      when Platform::Wii           then :wii
+      when Platform::Playstation   then :playstation
+      when Platform::Ipad          then :ipad
+      when Platform::Ipod          then :ipod
+      when Platform::Iphone        then :iphone
       else
         :unknown
     end
@@ -172,6 +172,11 @@ class UserAgent
 
   def platform
     @platform ||= self.class.platform(source)
+  end
+
+  def mobile?
+    [:android, :blackberry, :ipad, :ipod, :iphone].include? platform or
+      name == :psp
   end
 
   def to_s

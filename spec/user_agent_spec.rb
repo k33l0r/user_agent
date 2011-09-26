@@ -41,6 +41,12 @@ describe UserAgent do
     end
   end
 
+  describe "#mobile?" do
+    it "should return true for mobile platforms" do
+      @agent.mobile?.should == false
+    end
+  end
+
   describe "#to_s" do
     it "should return the user agent string" do
       @agent.to_s.should == @agent.source
