@@ -17,6 +17,7 @@ class UserAgent
     Safari        = /version\/([\d\w\.\-]+)/i
     Ps3           = /([\d\w\.\-]+)\)\s*$/i
     Psp           = /([\d\w\.\-]+)\)?\s*$/i
+    Lotus         = /Lotus-Notes\/([\w.]+)/i
   end
 
   module Browsers
@@ -28,6 +29,13 @@ class UserAgent
     PS3           = /playstation 3/i
     PSP           = /playstation portable/i
     Firefox       = /firefox/i
+    Lotus         = /lotus.notes/i
+    Netscape      = /netscape/i
+    SeaMonkey     = /seamonkey/i
+    Thunderbird   = /thunderbird/i
+    Outlook       = /microsoft.outlook/i
+    Evolution     = /evolution/i
+    IEMobile      = /iemobile|windows phone/i
   end
 
   module OS
@@ -36,6 +44,8 @@ class UserAgent
     Windows2003   = /windows nt 5\.2/i
     WindowsXP     = /windows nt 5\.1/i
     Windows2000   = /windows nt 5\.0/i
+    WindowsPhone  = /windows (ce|phone|mobile)( os)?/i
+    Windows       = /windows/i
     OSX           = /os x (\d+)[._](\d+)/i
     Linux         = /linux/i
     Wii           = /wii/i
@@ -43,6 +53,7 @@ class UserAgent
     PSP           = /playstation portable/i
     Ipad          = /\(iPad.*os (\d+)[._](\d+)/i
     Iphone        = /\(iPhone.*os (\d+)[._](\d+)/i
+    Symbian       = /symbian(os)?/i
   end
 
   module Platform
@@ -56,6 +67,8 @@ class UserAgent
     Iphone        = /iphone/i
     Android       = /android/i
     Blackberry    = /blackberry/i
+    WindowsPhone  = /windows (ce|phone|mobile)( os)?/i
+    Symbian       = /symbian(os)?/i
   end
 
   def self.engine(string)
@@ -66,6 +79,7 @@ class UserAgent
       when Engines::Chrome    then :chrome
       when Engines::Presto    then :presto
       when Engines::Gecko     then :gecko
+      when /opera/i           then :unknown
       when Engines::Msie      then :msie
       else
         :unknown
@@ -80,14 +94,21 @@ class UserAgent
 
   def self.browser_name(string)
     case string
-      when Browsers::Konqueror  then :konqueror
-      when Browsers::Chrome     then :chrome
-      when Browsers::Safari     then :safari
-      when Browsers::IE         then :ie
-      when Browsers::Opera      then :opera
-      when Browsers::PS3        then :ps3
-      when Browsers::PSP        then :psp
-      when Browsers::Firefox    then :firefox
+      when Browsers::Konqueror   then :konqueror
+      when Browsers::Chrome      then :chrome
+      when Browsers::Safari      then :safari
+      when Browsers::Opera       then :opera
+      when Browsers::PS3         then :ps3
+      when Browsers::PSP         then :psp
+      when Browsers::Firefox     then :firefox
+      when Browsers::Lotus       then :lotus
+      when Browsers::Netscape    then :netscape
+      when Browsers::SeaMonkey   then :seamonkey
+      when Browsers::Thunderbird then :thunderbird
+      when Browsers::Outlook     then :outlook
+      when Browsers::Evolution   then :evolution
+      when Browsers::IEMobile    then :iemobile
+      when Browsers::IE          then :ie
       else
         :unknown
     end
@@ -103,6 +124,8 @@ class UserAgent
         $1 if string =~ Versions::Ps3
       when :psp
         $1 if string =~ Versions::Psp
+      when :lotus
+        $1 if string =~ Versions::Lotus
       else
         $1 if string =~ /#{name}[\/ ]([\d\w\.\-]+)/i
     end
@@ -110,18 +133,21 @@ class UserAgent
 
   def self.os(string)
     case string
-      when OS::WindowsVista then 'Windows Vista'
-      when OS::Windows7     then 'Windows 7'
-      when OS::Windows2003  then 'Windows 2003'
-      when OS::WindowsXP    then 'Windows XP'
-      when OS::Windows2000  then 'Windows 2000'
-      when OS::OSX          then "OS X #{$1}.#{$2}"
-      when OS::Linux        then 'Linux'
-      when OS::Wii          then 'Wii'
-      when OS::PS3          then 'Playstation'
-      when OS::PSP          then 'Playstation'
-      when OS::Ipad         then "iPad OS #{$1}.#{$2}"
-      when OS::Iphone       then "iPhone OS #{$1}.#{$2}"
+      when OS::WindowsPhone  then 'Windows Phone'
+      when OS::WindowsVista  then 'Windows Vista'
+      when OS::Windows7      then 'Windows 7'
+      when OS::Windows2003   then 'Windows 2003'
+      when OS::WindowsXP     then 'Windows XP'
+      when OS::Windows2000   then 'Windows 2000'
+      when OS::Windows       then 'Windows'
+      when OS::OSX           then "OS X #{$1}.#{$2}"
+      when OS::Linux         then 'Linux'
+      when OS::Wii           then 'Wii'
+      when OS::PS3           then 'Playstation'
+      when OS::PSP           then 'Playstation'
+      when OS::Ipad          then "iPad OS #{$1}.#{$2}"
+      when OS::Iphone        then "iPhone OS #{$1}.#{$2}"
+      when Platform::Symbian then "Symbian OS"
       else
         'Unknown'
     end
@@ -129,6 +155,7 @@ class UserAgent
 
   def self.platform(string)
     case string
+      when Platform::WindowsPhone  then :windows_phone
       when Platform::Windows       then :windows
       when Platform::Mac           then :macintosh
       when Platform::Android       then :android
@@ -139,6 +166,7 @@ class UserAgent
       when Platform::Ipad          then :ipad
       when Platform::Ipod          then :ipod
       when Platform::Iphone        then :iphone
+      when Platform::Symbian       then :symbian
       else
         :unknown
     end
@@ -175,8 +203,7 @@ class UserAgent
   end
 
   def mobile?
-    [:android, :blackberry, :ipad, :ipod, :iphone].include? platform or
-      name == :psp
+    [:android, :blackberry, :ipad, :ipod, :iphone, :symbian, :windows_phone].include? platform or name == :psp
   end
 
   def to_s

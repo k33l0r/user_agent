@@ -56,5 +56,16 @@ describe UserAgent do
   test false, :firefox,    '3.6.8',        :linux,       'Linux',          :gecko,     '20100723',   'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.8) Gecko/20100723 Ubuntu/9.10 (karmic) Firefox/3.6.8'
   test false, :firefox,    '3.6.9',        :linux,       'Linux',          :gecko,     '20100824',   'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.9) Gecko/20100824 Firefox/3.6.9'
   test false, :firefox,    '3.6.9',        :linux,       'Linux',          :gecko,     '20100825',   'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.9) Gecko/20100825 Ubuntu/10.04 (lucid) Firefox/3.6.9'
+  test false, :opera,      '7.21',         :windows,     'Windows',        :unknown,   nil,          'Mozilla/4.0 (compatible; MSIE 6.0; Windows 98) Opera 7.21  [pt-BR]'
+  test false, :lotus,      '6.0',          :windows,     'Windows',        :unknown,   nil,          'Mozilla/4.0 (compatible; Lotus-Notes/6.0; Windows-NT)'
+  test false, :thunderbird, '2.0.0.23',    :windows,     'Windows XP',     :gecko,     '20090812',   'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23'
+  test false, :netscape,   '7.1',          :windows,     'Windows XP',     :gecko,     '20030624',   'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'
+  test false, :seamonkey,  '2.0.13',       :windows,     'Windows Vista',  :gecko,     '20110320',   'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.18) Gecko/20110320 SeaMonkey/2.0.13'
+  test false, :outlook,    '14.0.6025',    :windows,     'Windows 7',      :msie,      '7.0',        'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Win64; x64; Trident/4.0; .NET CLR 2.0.50727; SLCC2; .NET4.0C; .NET4.0E; InfoPath.3; Microsoft Outlook 14.0.6025; ms-office; MSOffice 14)'
+  test false, :evolution,  '2.32.2',       :unknown,     'Unknown',        :unknown,   nil,          'CamelHttpStream/1.0 Evolution/2.32.2'
+  test true,  :iemobile,   '7.6',          :windows_phone, 'Windows Phone', :msie,     '6.0',        'Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.6)'
+  test true,  :iemobile,   nil,            :windows_phone, 'Windows Phone', :msie,     '6.0',        'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Windows Phone 6.5.3.5)'
+  test true,  :iemobile,   '7.0',          :windows_phone, 'Windows Phone', :msie,     '7.0',        'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; HTC; 7 Mozart; Orange)'
+  test true,  :safari,     nil,            :symbian,     'Symbian OS',     :webkit,    '413',        'Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 NokiaE71-3/300.21.012; Profile/MIDP-2.0 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413'
 
 end
