@@ -71,6 +71,8 @@ class UserAgent
     Symbian       = /symbian(os)?/i
   end
 
+  MobilePlatforms = [:android, :blackberry, :ipad, :ipod, :iphone, :symbian, :windows_phone]
+
   def self.engine(string)
     case string
       when Engines::Webkit    then :webkit
@@ -203,7 +205,7 @@ class UserAgent
   end
 
   def mobile?
-    [:android, :blackberry, :ipad, :ipod, :iphone, :symbian, :windows_phone].include? platform or name == :psp
+    MobilePlatforms.include?(platform) || name == :psp
   end
 
   def to_s

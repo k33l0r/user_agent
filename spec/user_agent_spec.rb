@@ -42,8 +42,18 @@ describe UserAgent do
   end
 
   describe "#mobile?" do
-    it "should return true for mobile platforms" do
-      @agent.mobile?.should == false
+    it "returs true for mobile platform" do
+      agent = UserAgent.new('Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')
+      agent.should be_mobile
+    end
+
+    it "returns true for psp" do
+      agent = UserAgent.new('PSP (PlayStation Portable); 2.00')
+      agent.should be_mobile
+    end
+
+    it "returns false for not mobile platform" do
+      @agent.should_not be_mobile
     end
   end
 
