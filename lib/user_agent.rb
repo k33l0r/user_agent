@@ -19,6 +19,7 @@ class UserAgent
     Ps3           = /([\d\w\.\-]+)\)\s*$/i
     Psp           = /([\d\w\.\-]+)\)?\s*$/i
     Lotus         = /Lotus-Notes\/([\w.]+)/i
+    ELinks        = /ELinks\/([\d\w\.\-]+)/i
   end
 
   module Browsers
@@ -38,6 +39,7 @@ class UserAgent
     Outlook       = /microsoft.outlook/i
     Evolution     = /evolution/i
     IEMobile      = /iemobile|windows phone/i
+    ELinks        = /elinks/i
   end
 
   module OS
@@ -49,6 +51,7 @@ class UserAgent
     WindowsPhone  = /windows (ce|phone|mobile)( os)?/i
     Windows       = /windows/i
     OSX           = /os x (\d+)[._](\d+)/i
+    Darwin        = /darwin/i
     Ubuntu        = /ubuntu/i
     Debian        = /debian/i
     Linux         = /linux/i
@@ -116,6 +119,7 @@ class UserAgent
       when Browsers::Evolution   then :evolution
       when Browsers::IEMobile    then :iemobile
       when Browsers::IE          then :ie
+      when Browsers::ELinks      then :elinks
       else
         :unknown
     end
@@ -135,6 +139,8 @@ class UserAgent
         $1 if string =~ Versions::Psp
       when :lotus
         $1 if string =~ Versions::Lotus
+      when :elinks
+        $1 if string =~ Versions::ELinks
       else
         $1 if string =~ /#{name}[\/ ]([\d\w\.\-]+)/i
     end
@@ -150,6 +156,7 @@ class UserAgent
       when OS::Windows2000   then 'Windows 2000'
       when OS::Windows       then 'Windows'
       when OS::OSX           then "OS X #{$1}.#{$2}"
+      when OS::Darwin        then 'Darwin'
       when OS::Ubuntu        then 'Ubuntu'
       when OS::Debian        then 'Debian'
       when OS::Linux         then 'Linux'
