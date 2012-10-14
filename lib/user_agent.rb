@@ -47,6 +47,8 @@ class UserAgent
     WindowsPhone  = /windows (ce|phone|mobile)( os)?/i
     Windows       = /windows/i
     OSX           = /os x (\d+)[._](\d+)/i
+    Ubuntu        = /ubuntu/i
+    Debian        = /debian/i
     Linux         = /linux/i
     Wii           = /wii/i
     PS3           = /playstation 3/i
@@ -143,6 +145,8 @@ class UserAgent
       when OS::Windows2000   then 'Windows 2000'
       when OS::Windows       then 'Windows'
       when OS::OSX           then "OS X #{$1}.#{$2}"
+      when OS::Ubuntu        then 'Ubuntu'
+      when OS::Debian        then 'Debian'
       when OS::Linux         then 'Linux'
       when OS::Wii           then 'Wii'
       when OS::PS3           then 'Playstation'
