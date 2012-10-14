@@ -13,6 +13,7 @@ class UserAgent
   end
 
   module Versions
+    Epiphany      = /epiphany\/([\d\w\.\-]+)/i
     Chrome        = /chrome\/([\d\w\.\-]+)/i
     Safari        = /version\/([\d\w\.\-]+)/i
     Ps3           = /([\d\w\.\-]+)\)\s*$/i
@@ -21,6 +22,7 @@ class UserAgent
   end
 
   module Browsers
+    Epiphany      = /epiphany/i
     Konqueror     = /konqueror/i
     Chrome        = /chrome/i
     Safari        = /safari/i
@@ -98,6 +100,7 @@ class UserAgent
 
   def self.browser_name(string)
     case string
+      when Browsers::Epiphany    then :epiphany
       when Browsers::Konqueror   then :konqueror
       when Browsers::Chrome      then :chrome
       when Browsers::Safari      then :safari
@@ -120,6 +123,8 @@ class UserAgent
 
   def self.browser_version(string)
     case name = browser_name(string)
+      when :epiphany
+        $1 if string =~ Versions::Epiphany
       when :chrome
         $1 if string =~ Versions::Chrome
       when :safari
